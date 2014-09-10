@@ -8,7 +8,7 @@ public class ArrayTools
 	
 	public static boolean logging = true;
 	
-	public static int getSumOfIndexes(int[] array)
+	public static int getSumOfIndexes(int[] array) //get's the sum of the entire array
 	{
 		int result = 0;
 		for(int i = 0; i < array.length; i++)
@@ -20,7 +20,7 @@ public class ArrayTools
 		return result;
 	}
 	
-	public static int getSumOfIndexes(int[] array, int start)
+	public static int getSumOfIndexes(int[] array, int start) //get's the sum of the array, starting from int start
 	{
 		int result = 0;
 		for(int i = start; i < array.length; i++)
@@ -32,7 +32,7 @@ public class ArrayTools
 		return result;
 	}
 	
-	public static int getSumOfIndexes(int[] array, int start, int end)
+	public static int getSumOfIndexes(int[] array, int start, int end) //get's the sum of the array in between int start and int end
 	{
 		int result = 0;
 		for(int i = start; i <= end; i++)
@@ -44,7 +44,7 @@ public class ArrayTools
 		return result;
 	}
 	
-	public static int getIterationsOfValue(int[] array, int value)
+	public static int getIterationsOfValue(int[] array, int value) //Checks how many times int value appears in the array
 	{
 		prnt("Counting the amount of iterations of \'"+value+"\'...");
 		int count = 0;
