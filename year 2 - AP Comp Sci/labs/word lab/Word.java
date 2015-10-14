@@ -9,13 +9,13 @@ public class Word
 	/*complete the default constructor method*/
    public Word()
 	{
-      word = "";
+      setWord("");
 	}
 
    /*complete the constructor method*/
 	public Word(String wrd)
 	{
-      word = wrd;
+      setWord(wrd);
 	}
 
    /*setWord should initialize the appropriate instane variable*/
@@ -29,15 +29,15 @@ public class Word
 	public int getNumVowels()
 	{
 		int count=0;
-      for(int i = 0; i < vowels.length(); i++) {
-         //Loops through String to check every thing that constitutes as a vowel
-         for(int j = 0; j < word.length(); j++) {
-            //Checks the entire string for current vowel
-            if(word.charAt(j) == vowels.charAt(i)) {
-               count++;
-            }
+      
+      for(int i = 0; i < word.length(); i++) {
+         //Checks the entire string for current vowel
+         if(isVowel(word.charAt(i))) {
+            count++;
          }
       }
+      
+      return count;
 	}
 	
 	/*getLength returns the length of the word*/
@@ -51,4 +51,13 @@ public class Word
 	{
 	   return word;
 	}
+   
+   public boolean isVowel(String ch)
+   { 
+     return (ch.equals("a") || ch.equals("e") || ch.equals("i") || ch.equals("o") || ch.equals("u"));
+   }
+   public boolean isVowel(char ch)
+   { 
+     return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
+   }
 }
