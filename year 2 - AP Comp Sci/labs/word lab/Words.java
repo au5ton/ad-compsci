@@ -87,6 +87,6 @@ public class Words
    /*toString will print out the list*/
 	public String toString()
 	{
-	   return Arrays.toString(words.toArray());
+	   return words.toString();
 	}
 }
