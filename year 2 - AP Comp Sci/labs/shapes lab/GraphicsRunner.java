@@ -1,4 +1,4 @@
-//© A+ Computer Science
+//ï¿½ A+ Computer Science
 // www.apluscompsci.com
 
 //graphics frame to run graphics examples
@@ -48,6 +48,3 @@ public class GraphicsRunner extends JFrame
 		GraphicsRunner run = new GraphicsRunner();
 	}
 }
-
-
-

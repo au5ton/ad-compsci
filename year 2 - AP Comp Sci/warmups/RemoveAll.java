@@ -19,30 +19,30 @@ public class RemoveAll
 		ray.add("all");
 		ray.add("all");
 		//out.println(ray);
-		//out.println(ray.size());		
+		//out.println(ray.size());
 
 		//add in a loop to remove all occurrences of all
-      /*out.println("Removing all occurrences of \'all\'");
-      out.println("all exists: "+ray.remove("all"));
-      int spot = ray.size()-1;
-      while(spot >= 0) {
-         //out.println(ray);
-		   //out.println(spot);	
-         if(ray.get(spot).equals("all")) {
-            out.println("index "+spot+" in array is \'all\', removing: "+ray.get(spot));
-            ray.remove(spot);
-         }
-         spot--;
-      }*/
-      
-      out.println(ray);
-      while(ray.remove("all")) {}
-      out.println(ray);
-      
-      //out.println("all exists: "+ray.remove("all"));
-      
-      //out.println(ray);
-		//out.println(ray.size());	
-
+		/*out.println("Removing all occurrences of \'all\'");
+		out.println("all exists: "+ray.remove("all"));
+		int spot = ray.size()-1;
+		while(spot >= 0) {
+		//out.println(ray);
+		//out.println(spot);
+		if(ray.get(spot).equals("all")) {
+		out.println("index "+spot+" in array is \'all\', removing: "+ray.get(spot));
+		ray.remove(spot);
 	}
+	spot--;
+}*/
+
+out.println(ray);
+while(ray.remove("all")) {}
+	out.println(ray);
+
+	//out.println("all exists: "+ray.remove("all"));
+
+	//out.println(ray);
+	//out.println(ray.size());
+
+}
 }

@@ -34,10 +34,10 @@ public class ArrayFunHouseTwoRunner
 		System.out.println("first 7 values greater than 9  " + Arrays.toString(updated));
 		updated = ArrayFunHouseTwo.getCountValuesBiggerThanX(four, 5, 15);
 		System.out.println("first 5 values greater than 15  " + Arrays.toString(updated));
-      
-      int a = 6;
-      int b = 20;
-      int c = (a%b);
-      System.out.println("this is it " +c);	
-      }
+
+		int a = 6;
+		int b = 20;
+		int c = (a%b);
+		System.out.println("this is it " +c);
+	}
 }

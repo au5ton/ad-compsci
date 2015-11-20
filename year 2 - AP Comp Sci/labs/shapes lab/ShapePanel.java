@@ -31,18 +31,18 @@ public class ShapePanel extends JPanel
 
 
 		//instantiate a Shape
-      Shape bob = new Shape(50,50,200,200,Color.PINK);
-      bob.draw(window);
-      
-      Shape sally = new Shape(175,175,150,150,Color.YELLOW);
-      sally.draw(window);
+		Shape bob = new Shape(50,50,200,200,Color.PINK);
+		bob.draw(window);
 
-      Shape andrew = new Shape(250,250,100,100,new Color(192,255,0));
-      andrew.draw(window);
+		Shape sally = new Shape(175,175,150,150,Color.YELLOW);
+		sally.draw(window);
 
-      Shape bruh = new Shape(310,310,75,75,new Color(255,0,255));
-      bruh.draw(window);
-      
-      
+		Shape andrew = new Shape(250,250,100,100,new Color(192,255,0));
+		andrew.draw(window);
+
+		Shape bruh = new Shape(310,310,75,75,new Color(255,0,255));
+		bruh.draw(window);
+
+
 	}
 }

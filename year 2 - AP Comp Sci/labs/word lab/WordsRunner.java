@@ -20,8 +20,8 @@ public class WordsRunner
 		out.println("\nafter removing words with 3 chars \n" + test);
 		out.println("\nnumber of vowels in the words removed == " + vowelsRemoved);
 		out.println("\n\n");
-      
-      test.setWords("fun fly four six times ten plus eight");
+
+		test.setWords("fun fly four six times ten plus eight");
 		out.println(test);
 		out.println("word with 2 vowels = "+test.countWordsWithXVowels(2));
 		out.println("word with 3 vowels = "+test.countWordsWithXVowels(3));
@@ -34,8 +34,8 @@ public class WordsRunner
 		out.println("\nafter removing words with 3 chars \n" + test);
 		out.println("\nnumber of vowels in the words removed == " + vowelsRemoved);
 		out.println("\n\n");
-      
-      test.setWords("alligator chicken dog cat pig buffalo");
+
+		test.setWords("alligator chicken dog cat pig buffalo");
 		out.println(test);
 		out.println("word with 2 vowels = "+test.countWordsWithXVowels(2));
 		out.println("word with 3 vowels = "+test.countWordsWithXVowels(3));

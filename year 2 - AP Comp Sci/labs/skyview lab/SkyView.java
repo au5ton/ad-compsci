@@ -1,18 +1,18 @@
 
 /**
- * Write a description of class SkyView here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+* Write a description of class SkyView here.
+*
+* @author (your name)
+* @version (a version number or a date)
+*/
 public class SkyView
 {
     // instance variables - replace the example below with your own
     private double[][] view;
 
     /**
-     * Constructor for objects of class SkyView
-     */
+    * Constructor for objects of class SkyView
+    */
     public SkyView(int numRows, int numCols, double[] scanned)
     {
         view = new double[numRows][numCols];
@@ -44,17 +44,17 @@ public class SkyView
         }
         return sum / count;
     }
-    
+
     public String toString() {
-      
-      String result = "";
-    
-      for(int r = 0; r < view.length; r++) {
-         for(int c = 0; c < view[r].length; c++) {
-            result += view[r][c]+" ";
-         }
-         result += "\n";
-      }
-      return result;
+
+        String result = "";
+
+        for(int r = 0; r < view.length; r++) {
+            for(int c = 0; c < view[r].length; c++) {
+                result += view[r][c]+" ";
+            }
+            result += "\n";
+        }
+        return result;
     }
 }
