@@ -1,0 +1,23 @@
+@Java
+
+method hopUntilWater()
+{
+   while(isClear(AHEAD))
+   {
+      plant();
+      hop();
+   }
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(100);
+   a.hopUntilWater();
+   a.turn(RIGHT);
+   a.hopUntilWater();
+   a.turn(RIGHT);
+   a.hopUntilWater();
+   a.turn(RIGHT);
+   a.hopUntilWater();
+   a.turn(RIGHT);
+}

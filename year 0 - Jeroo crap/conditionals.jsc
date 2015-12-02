@@ -1,0 +1,12 @@
+@Java
+
+@@
+method main()
+{
+   Jeroo a = new Jeroo(1,0);
+   
+   while( !(a.isWater(LEFT) && a.isWater(RIGHT)) )
+   {
+      a.hop();
+   }
+}

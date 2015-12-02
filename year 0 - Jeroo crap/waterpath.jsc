@@ -1,0 +1,36 @@
+@Java
+method navigate()
+{
+   while(hasFlower())
+   {
+      if(!isWater(AHEAD))
+      {
+         hop();
+         if(isWater(RIGHT) && isWater(AHEAD) && !isWater(LEFT))
+         {
+            turn(LEFT);
+         }
+         else if(isWater(LEFT) && isWater(AHEAD) && !isWater(RIGHT))
+         {
+            turn(RIGHT);
+         }
+         else if(isWater(LEFT) && isWater(AHEAD) && isWater(RIGHT))
+         {
+            plant();
+         }
+      }
+   }
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(1);
+   
+   while(a.isJeroo(HERE))
+   {
+      a.navigate();
+      a.turn(RIGHT);
+      a.turn(RIGHT);
+      a.pick();
+   } 
+}

@@ -1,0 +1,77 @@
+@Java
+method turnAround()
+{
+   turn(RIGHT);
+   turn(RIGHT);
+}
+
+method backToStart()
+{
+   turnAround();
+   hop(22);
+   turnAround();
+}      
+
+method searchForFlowers()
+{
+   while(!isWater(AHEAD))
+   {
+      if(isFlower(LEFT))
+      {
+         turn(LEFT);
+         hop();
+         pick();
+         turnAround();
+         hop();
+         turn(LEFT);
+      }
+      if(isFlower(RIGHT))
+      {
+         turn(RIGHT);
+         hop();
+         pick();
+         turnAround();
+         hop();
+         turn(RIGHT);
+      }
+      hop();
+   }
+}
+
+method searchForNets()
+{
+   while(!isWater(AHEAD))
+   {
+      if(isNet(LEFT) && hasFlower())
+      {
+         turn(LEFT);
+         toss();
+         hop();
+         plant();
+         turnAround();
+         hop();
+         turn(LEFT);
+      }
+      if(isNet(RIGHT) && hasFlower())
+      {
+         turn(RIGHT);
+         toss();
+         hop();
+         plant();
+         turnAround();
+         hop();
+         turn(RIGHT);
+      }
+      hop();
+   }
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(1,0,1);
+
+   a.searchForFlowers();
+   a.backToStart();
+   a.searchForNets();
+   a.backToStart();
+}

@@ -1,0 +1,106 @@
+@Java
+method turnAround()
+{
+   turn(RIGHT);
+   turn(RIGHT);
+}
+
+method smartTurn()
+{
+   if(isFacing(EAST))
+   {
+      turn(RIGHT);
+      if(!isWater(AHEAD))
+      {
+         hop();
+      }
+      turn(RIGHT);
+   }
+   else if(isFacing(WEST))
+   {
+      turn(LEFT);
+      if(!isWater(AHEAD))
+      {
+         hop();
+      }
+      turn(LEFT);
+   }
+}
+
+method markLakeR()
+{
+   while(isWater(RIGHT) && !isFlower(HERE) && hasFlower())
+   {
+      plant();
+      hop();
+      if(!isWater(RIGHT))
+      {
+         turn(RIGHT);
+         hop();
+      }
+      while(isWater(AHEAD) && isWater(LEFT) && hasFlower())
+      {
+         plant();
+      }
+   }
+}
+
+method markLakeL()
+{
+   while(isWater(LEFT) && !isFlower(HERE) && hasFlower())
+   {
+      plant();
+      hop();
+      if(!isWater(LEFT))
+      {
+         turn(LEFT);
+         hop();
+      }
+      while(isWater(AHEAD) && isWater(LEFT) && hasFlower())
+      {
+         plant();
+      }
+   }
+}
+
+method findLake()
+{
+    while(!isWater(AHEAD))
+    {
+       if(isWater(RIGHT) && isFacing(EAST))
+       {
+          markLakeR();
+          if(!isWater(AHEAD))
+          {
+             hop();
+          }
+       }
+       else if(isWater(LEFT) && isFacing(WEST))
+       {
+          markLakeL();
+          if(!isWater(AHEAD))
+          {
+             hop();
+          }
+       }
+       else if(isFlower(HERE))
+       {
+          hop();
+       }
+       else
+       {
+          hop();
+       }
+    }
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(0,0,75);
+   
+   while(a.hasFlower())
+   {
+      a.findLake();
+      a.smartTurn();
+   }
+}

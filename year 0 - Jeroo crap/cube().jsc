@@ -1,0 +1,43 @@
+@Java
+method cube()
+{
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   
+   turn(RIGHT);
+   
+   hop();
+   plant();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   
+   turn(LEFT);
+   
+   hop();
+   plant();
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   
+   turn(LEFT);
+   hop(2);
+   turn(RIGHT);
+   hop();
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(0,0,18);
+   a.hop();
+   a.cube();
+   a.hop();
+   a.cube();
+}

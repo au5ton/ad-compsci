@@ -1,0 +1,45 @@
+@Java
+method spiral()
+{
+    while(!hasFlower() && isClear(AHEAD))
+    {
+       hop();
+       pick();
+       if(isNet(AHEAD) || isWater(AHEAD))
+       {
+           turn(RIGHT);
+       }
+       if(isFlower(AHEAD))
+       {
+          hop();
+          pick();
+       }
+   }
+}
+
+method spiralOut()
+{
+    while(isClear(AHEAD))
+    {
+       hop();
+       if(isNet(AHEAD) || isWater(AHEAD))
+       {
+           turn(LEFT);
+       }
+   }
+}
+
+method turnAround()
+{
+   turn(RIGHT);
+   turn(RIGHT);
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(0);
+   
+   a.spiral();
+   a.turnAround();
+   a.spiralOut();
+}

@@ -1,0 +1,57 @@
+@Java
+method faceNorth()
+{
+   while( !(isFacing(NORTH)) )
+   {
+      turn(RIGHT);
+   }
+}
+
+method faceSouth()
+{
+   while( !(isFacing(SOUTH)) )
+   {
+      turn(RIGHT);
+   }
+}
+
+method faceEast()
+{
+   while( !(isFacing(EAST)) )
+   {
+      turn(RIGHT);
+   }
+}
+
+method faceWest()
+{
+   while( !(isFacing(WEST)) )
+   {
+      turn(RIGHT);
+   }
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(1,0,1);
+   while(a.hasFlower())
+   {
+      if(a.isClear(AHEAD))
+      {
+         a.hop();
+      }
+      else if(!(a.isClear(AHEAD)) && !(a.isClear(RIGHT)) && !(a.isClear(LEFT)))
+      {
+         a.toss();
+         a.faceNorth();
+      }
+      else if(a.isWater(AHEAD) || a.isNet(AHEAD) || a.isFlower(AHEAD))
+      {
+         a.turn(RIGHT);
+      }
+      else
+      {
+         a.toss();
+      }
+   }
+}

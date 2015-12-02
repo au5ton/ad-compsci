@@ -1,0 +1,491 @@
+@Java
+method turnAround()
+{
+   turn(RIGHT);
+   turn(RIGHT);
+}
+
+method drawZero()
+{
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   
+   //PREPARE FOR NEW CHARACTER
+   
+   turn(RIGHT);
+   hop(7);
+}
+
+method drawOne()
+{
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   turnAround();
+   hop();
+   turn(RIGHT);
+   hop();
+   turn(RIGHT);
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   turnAround();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(LEFT);
+   hop(6);
+   turn(RIGHT);
+   hop(3);
+}
+
+method drawTwo()
+{
+   turn(RIGHT);
+   hop();
+   plant();
+   turnAround();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   
+   turn(RIGHT);
+   hop();
+   plant();
+   turn(LEFT);
+   hop();
+   
+   turn(RIGHT);
+   hop();
+   plant();
+   turn(LEFT);
+   hop();
+   
+   turn(RIGHT);
+   hop();
+   plant();
+   turn(LEFT);
+   hop();
+   
+   turn(RIGHT);
+   hop();
+   plant();
+   
+   turnAround();
+   
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(LEFT);
+   hop(6);
+   turn(RIGHT);
+   hop(3);
+   
+}
+
+method drawThree()
+{
+   turn(RIGHT);
+   hop();
+   plant();
+   turnAround();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   turnAround();
+   hop(2);
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop(5);
+   turn(RIGHT);
+   hop(7);
+}
+
+method drawFour()
+{
+   turn(RIGHT);
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(LEFT);
+   hop(3);
+   turnAround();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turnAround();
+   hop(6);
+   turn(RIGHT);
+   hop(3);
+}
+
+method drawFive()
+{
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turnAround();
+   hop(4);
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop(6);
+   turn(RIGHT);
+   hop(7);
+}
+
+method drawSix()
+{
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turnAround();
+   hop(4);
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop(3);
+   turn(RIGHT);
+   hop(6);
+   
+}
+
+method drawSeven()
+{
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turnAround();
+   hop(6);
+   turn(RIGHT);
+   hop(3);
+}
+
+method drawEight()
+{
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turnAround();
+   hop(2);
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   turn(LEFT);
+   hop(3);
+   turn(RIGHT);
+   hop(3);
+}
+
+method drawNine()
+{
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turnAround();
+   hop(3);
+   turn(LEFT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+   plant();
+   turn(RIGHT);
+   hop();
+   plant();
+   hop();
+   plant();
+   hop();
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(100);
+   //a.drawZero();
+   a.drawOne();
+   //a.drawTwo();
+   a.drawThree();
+   //a.drawFour();
+   //a.drawFive();
+   //a.drawSix();
+   //a.drawSeven();
+   //a.drawEight();
+   a.drawNine();
+}

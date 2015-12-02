@@ -1,0 +1,82 @@
+@Java
+
+@@
+//LIVIN' LIKE LARRY!
+//january 9, 2014
+
+method main()
+{
+   Jeroo a = new Jeroo(20);
+   
+   a.hop(2);
+   a.turn(RIGHT);
+   a.hop();
+   a.plant();
+   a.turn(LEFT);
+   a.hop();
+   a.plant();
+   a.hop();
+   a.turn(RIGHT);
+   a.hop();
+   a.plant();
+   a.hop();
+   a.plant();
+   a.hop();
+   a.plant();
+   a.hop();
+   a.plant();
+   a.turn(RIGHT);
+   a.hop(3);
+   a.turn(RIGHT);
+   a.plant();
+   a.hop();
+   a.plant();
+   a.hop();
+   a.plant();
+   a.hop();
+   a.plant();
+   
+   a.turn(RIGHT);
+   a.hop();
+   a.turn(RIGHT);
+   a.hop();
+   a.plant();
+   a.turn(LEFT);
+   a.hop();
+   a.plant();
+   
+   //A COMPLETED
+   
+   a.hop(4);
+   a.turn(LEFT);
+   a.hop(2);
+   a.turn(RIGHT);
+   
+   //J CODE STARTS HERE
+   
+   a.plant();
+   a.hop();
+   a.plant();
+   a.hop();
+   a.plant();
+   a.turn(RIGHT);
+   a.hop();
+   a.turn(RIGHT);
+   a.hop();
+   a.turn(LEFT);
+   
+   a.plant();
+   a.hop();
+   a.plant();
+   a.hop();
+   a.plant();
+   a.hop();
+   
+   a.turn(RIGHT);
+   a.hop();
+   a.plant();
+   a.hop();
+   a.turn(RIGHT);
+   a.hop();
+   a.plant();
+}

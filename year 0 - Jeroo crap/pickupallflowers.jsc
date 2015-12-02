@@ -1,0 +1,46 @@
+@Java
+method turnAround()
+{
+   turn(RIGHT);
+   turn(RIGHT);
+}
+
+
+method pickupAllFlowers()
+{
+    while(!isWater(AHEAD))
+    {
+       hop();
+       pick();
+       if(isWater(AHEAD))
+       {
+          if(isFacing(WEST))
+          {
+             turn(LEFT);
+             if(!isWater(AHEAD))
+             {
+                hop();
+                pick();
+                turn(LEFT);
+             }
+          }
+          else if(isFacing(EAST))
+          {
+             turn(RIGHT);
+             if(!isWater(AHEAD))
+             {
+                hop();
+                pick();
+                turn(RIGHT);
+             }
+          }
+       }
+    }
+}
+@@
+method main()
+{
+   Jeroo a = new Jeroo(0,0,75);
+   
+   a.pickupAllFlowers();
+}
