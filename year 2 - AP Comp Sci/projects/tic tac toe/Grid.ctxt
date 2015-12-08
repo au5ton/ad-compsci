@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Grid()
+comment1.params=rows\ cols
+comment1.target=Grid(int,\ int)
+comment2.params=rows\ cols
+comment2.target=void\ setSize(int,\ int)
+comment3.params=row\ col\ val
+comment3.target=void\ setSpot(int,\ int,\ Drawable)
+comment4.params=row\ col
+comment4.target=Drawable\ getSpot(int,\ int)
+comment5.params=
+comment5.target=int\ getNumRows()
+comment6.params=
+comment6.target=int\ getNumCols()
+comment7.params=window
+comment7.target=boolean\ drawGrid(java.awt.Graphics)
+comment8.params=
+comment8.target=java.lang.String\ toString()
+numComments=9
