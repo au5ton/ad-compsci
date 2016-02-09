@@ -1,4 +1,4 @@
-//complete the methods below
+    //complete the methods below
 //the default constructor is done for you
 import java.awt.Graphics;
 import java.awt.Color;

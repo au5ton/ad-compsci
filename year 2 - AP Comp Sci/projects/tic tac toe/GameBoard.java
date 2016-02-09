@@ -101,7 +101,7 @@ public class GameBoard extends Canvas implements MouseListener
                 //save the current button pressed to compare to next button pressed
                 prevMouseButton=mouseButton;
             }             
-        
+            
         }
     }
     

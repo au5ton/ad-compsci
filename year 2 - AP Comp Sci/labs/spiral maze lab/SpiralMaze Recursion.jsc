@@ -1,0 +1,30 @@
+@Java
+method mazer()
+//write the code to have bob run the maze to the center
+{
+  if(isClear(AHEAD)) {
+      hop();
+      mazer();
+  }
+  else if(isWater(LEFT) && isWater(RIGHT) && isWater(AHEAD)) {
+      //do nothing
+  }
+  else if(isClear(LEFT)) {
+      turn(LEFT);
+      mazer();
+  }
+  else if(isClear(RIGHT)) {
+      turn(RIGHT);
+      mazer();
+  }
+}
+
+@@
+method main()
+{
+  Jeroo bob = new Jeroo();
+   bob.mazer();
+   bob.turn(RIGHT);
+   bob.turn(RIGHT);
+   bob.mazer();
+}
