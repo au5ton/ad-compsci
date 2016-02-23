@@ -11,7 +11,7 @@ public class AtCounter
       //use nested loops to randomly load the matrix
       for(int r = 0; r < atMat.length; r++) {
          for(int c = 0; c < atMat[r].length; c++) {
-            if(Math.random() > 0.5) {
+            if(Math.random() > 0.50) {
                atMat[r][c] = "@";
             }
             else {
