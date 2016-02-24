@@ -17,46 +17,50 @@ public class ColoredCell extends Cell
 
 	public ColoredCell(boolean fill)
 	{
-
-
+      super(5,5,5,5);
+      setFilled(fill);
+      setColor(Color.BLUE);
 	}
 
 	public ColoredCell(int x, int y, boolean fill)
 	{
-
-
+      super(x,y,5,5);
+      setFilled(fill);
+      setColor(Color.BLUE);
 	}
 
 	public ColoredCell(int x, int y, int w, int h, boolean fill)
 	{
-
-
+      super(x,y,w,h);
+      setFilled(fill);
+      setColor(Color.BLUE);
 	}
 
 	public ColoredCell(int x, int y, int w, int h, boolean fill, Color c)
 	{
-
-
+      super(x,y,w,h);
+      setFilled(fill);
+      setColor(c);
 	}
 
 	public void setFilled(boolean fill)
 	{
-
+      this.filled = fill;
 	}
 
 	public void setColor(Color c)
 	{
-
+      this.color = c;
 	}
 	
 	public boolean getFilled()
 	{
-		return false;
+		return this.filled;
 	}
 	
 	public Color getColor()
 	{
-		return color;
+		return this.color;
 	}
 	
 	public void draw(Graphics window)
@@ -66,11 +70,8 @@ public class ColoredCell extends Cell
       if(getFilled()==true)
       {
        //fill in the spot with a green square
+       window.fillRect(getX(),getY(),getWidth(),getHeight());
       }
-
-
-
-
 	}
 	
 	public String toString()
