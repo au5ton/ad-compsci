@@ -21,7 +21,12 @@ public class GarbageCollector extends JPanel implements MouseListener
 		{
 			for(int c=0; c<trashMap.getNumCols(); c++)
 			{
-				//randomly load trashMap with squares
+				if(Math.random() > 0.50) {
+               trashMap.setSpot(r,c,new ColoredCell(r,c,true));
+            }
+            else {
+               trashMap.setSpot(r,c,new ColoredCell(r,c,false));
+            }
      		}
 		}
 
@@ -35,6 +40,9 @@ public class GarbageCollector extends JPanel implements MouseListener
 	{
 		mouseX=e.getX();
 		mouseY=e.getY();
+      mouseX = mouseX / 25;
+      mouseY = mouseY / 25;
+      System.out.println("Estimated cell clicked: ("+mouseX+" , "+mouseY+")");
 		mouseClicked = true;
 		repaint();
 	}
@@ -60,23 +68,39 @@ public class GarbageCollector extends JPanel implements MouseListener
 	{
 		
 		//use nested loops to draw the Trash Map
-      // you will need to make a Cell object call cell and use cell.draw(window);
-		
-		
-		
-		
-		
+      // you will need to make a Cell object call cell and use cell.draw(window)
+		for(int r=0; r<trashMap.getNumRows(); r++)
+		{
+			for(int c=0; c<trashMap.getNumCols(); c++)
+			{
+				trashMap.getSpot(r,c).draw(window);
+     		}
+		}
 	}
 
 	public void pickUpTrash( int r, int c )
 	{
-	
 	//use recursion to pick up Trash
 	
-	
-	
-	
-	
+   /*
+   
+   if(r > 0 && r < atMat.length && c > 0 && c < atMat[r].length && atMat[r][c].equals("@")) {
+         atMat[r][c] = "-";
+         return 1 + countAts(r+1,c) + countAts(r-1,c) + countAts(r,c+1) + countAts(r,c-1);
+      }
+      return 0; 
+   
+   */
+   
+      if(r > 0 && r < trashMap.getNumRows() && c > 0 && c < trashMap.getNumRows() && ((ColoredCell)trashMap.getSpot(r,c)).getFilled()) {
+         //atMat[r][c] = "-";
+         trashMap.setSpot(r,c,new ColoredCell(r,c,false));
+         //Thread.sleep(250);
+         pickUpTrash(r+1,c);
+         pickUpTrash(r-1,c);
+         pickUpTrash(r,c+1);
+         pickUpTrash(r,c-1);
+      }
 	}
 
 	public void mouseEntered(MouseEvent e) { }

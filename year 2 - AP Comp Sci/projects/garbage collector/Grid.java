@@ -9,43 +9,42 @@ public class Grid
 	
 	public Grid() //set the default size to 0,0
 	{
-		
+		grid = new Cell[0][0];
 	}
 
 	public Grid(int rows, int cols)
 	{
-	
-	
+      setSize(rows,cols);
 	}
 
 	public void setSize(int rows, int cols)
 	{
-		
+		grid = new Cell[rows][cols];
 	}
 
 	public void setSpot(int row,int col, Cell val)
 	{
-	
-	
+      grid[row][col] = val;
 	}
 	
 	public Cell getSpot(int row, int col)
 	{
-		return null;
+		return grid[row][col];
    }
 	
 	public int getNumRows()
 	{
-		return 0;
+		return grid.length;
 	}
 	
 	public int getNumCols()
 	{
-		return 0;
+		return grid[0].length;
    }
 
 	public boolean drawGrid(Graphics window)
-	{//make sure you know what's happening here
+	{
+      //make sure you know what's happening here
 		boolean full=true;
 		
 		for(int r=0;r<grid.length;r++)
@@ -69,6 +68,13 @@ public class Grid
 		String output="";
 		//use nested loops	
 	   
+      for(int r = 0; r < grid.length; r++)
+         for(int c = 0; c < grid[r].length; c++) {
+            if(grid[r][c]!=null)
+               output += (grid[r][c].toString()+" ");
+            else
+               output += "null ";
+         }
 	
 		return output;
 	}
