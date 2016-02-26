@@ -66,12 +66,12 @@ public class ColoredCell extends Cell
 	public void draw(Graphics window)
 	{
 		window.setColor(getColor());
-		window.drawRect(getX()*25,getY()*25,getWidth()*2,getHeight()*2);
+		window.drawRect(getX(),getY(),getWidth(),getHeight());
       if(getFilled()==true)
       {
        //fill in the spot with a green square
        window.setColor(Color.GREEN);
-       window.fillRect(getX()*25,getY()*25,getWidth()*2,getHeight()*2);
+       window.fillRect(getX(),getY(),getWidth(),getHeight());
       }
 	}
 	
