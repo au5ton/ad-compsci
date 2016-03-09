@@ -11,34 +11,33 @@ public class EmptyCell extends Cell
   		
 	public EmptyCell(int x, int y, int w, int h, boolean mine)
 	{
-      
-      
+      super(x,y,w,h,mine);
+      setCount(0);
 	}
 
 	public void setVisited(boolean visit)
 	{
-      
+      this.visited = visit;
 	}
    
    public boolean getVisited()
 	{
-      
+      return this.visited;
 	}
-
 
 	public boolean getMined()
 	{
-   
+      return this.mine;
 	}
    
    public void setCount(int count)
 	{
-		
+		this.count = count;
 	}
    
    public int getCount()
 	{
-		
+		return this.count;
 	}
 
 
