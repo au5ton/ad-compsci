@@ -31,14 +31,14 @@ public class Minesweeper extends JPanel implements MouseListener
             temp_c = ((int)Math.random()*(this.cols+1));
          }
          //Current spot in temp_r,temp_c is confirmed to be null because of the previous loop
-         mineMap.setSpot(temp_r,temp_c, new MineCell(  /**/  ));
+         mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*this.rows+10, temp_c*this.cols+10, 10, 10, true));
       }
       
       //then load the rest of the empty cells
       for(int r = 0; r < this.rows; r++)
        for(int c = 0; c < this.cols; c++) {
          if(mineMap.getSpot(r,c) == null) {
-            mineMap.setSpot(r,c, new EmptyCell(  /**/  ));
+            mineMap.setSpot(r,c, new EmptyCell(r*this.rows+10, c*this.cols+10, 10, 10, false));
          }
        }
 		
