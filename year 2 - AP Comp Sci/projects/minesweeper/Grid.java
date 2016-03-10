@@ -26,7 +26,6 @@ public class Grid
 	public void setSpot(int row,int col, Cell val)
 	{
 	   grid[row][col] = val;
-	
 	}
 	
 	public Cell getSpot(int row, int col)
@@ -52,8 +51,7 @@ public class Grid
 		for(int r=0;r<grid.length;r++)
 		{
 			for(int c=0;c<grid[r].length;c++)
-			{
-							
+			{	
 				   if(grid[r][c]!=null)
                  grid[r][c].draw(window);
 				   else 

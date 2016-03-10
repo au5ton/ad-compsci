@@ -50,15 +50,57 @@ public class EmptyCell extends Cell
       //if the cell is marked as visited
         //replace the gray square with a lighter shade of gray and
         //print out the count number on top (make sure you use different colors for each number -- max 8; zeros don't get a number)
-      
-       
-	}
-
-      
      
+     window.setColor(Color.GRAY);
+     window.fillRect(getX(),getY(),getWidth(),getHeight());
+     window.setColor(Color.BLACK);
+     window.drawRect(getX(),getY(),getWidth(),getHeight());
 
-
-	
+     if(this.visited) {
+         window.setColor(Color.LIGHT_GRAY);
+         window.fillRect(getX(),getY(),getWidth(),getHeight());
+         
+         //window.setFont(Font.MONOSPACED);
+         switch(this.count) {
+            case 1: {
+               window.setColor(new Color(0,0,255));
+               break;
+            }
+            case 2: {
+               window.setColor(new Color(0,128,0));
+               break;
+            }
+            case 3: {
+               window.setColor(new Color(255,0,0));
+               break;
+            }
+            case 4: {
+               window.setColor(new Color(0,0,128));
+               break;
+            }
+            case 5: {
+               window.setColor(new Color(128,0,0));
+               break;
+            }
+            case 6: {
+               window.setColor(new Color(0,128,128));
+               break;
+            }
+            case 7: {
+               window.setColor(new Color(0,0,0));
+               break;
+            }
+            case 8: {
+               window.setColor(new Color(128,128,128));
+               break;
+            }
+            default: {
+               //
+            }
+         }
+         window.drawString(Integer.toString(this.count), getX(), getY());
+      }
+  	}
 	
 	public String toString()
 	{

@@ -36,13 +36,13 @@ public class MineCell extends Cell
          window.setColor(Color.RED);
          window.fillRect(getX(),getY(),getWidth(),getHeight());
          window.setColor(Color.BLACK);
-         window.drawRect(super.x,super.y,super.w,super.h);
+         window.drawRect(getX(),getY(),getWidth(),getHeight());
       }
       else {
          window.setColor(Color.GRAY);
-         window.fillRect(super.x,super.y,this.w,this.h);
+         window.fillRect(getX(),getY(),getWidth(),getHeight());
          window.setColor(Color.BLACK);
-         window.drawRect(this.x,this.y,this.w,this.h);
+         window.drawRect(getX(),getY(),getWidth(),getHeight());
       }
          
     }
