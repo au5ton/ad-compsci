@@ -22,8 +22,8 @@ public class Minesweeper extends JPanel implements MouseListener
 	private int temp;
 	private final boolean cellLockEnabled = true;
 	private boolean lost;
-	private final boolean generatorDebugging = true;
-	private final boolean useClusterGenerator = false;
+	private final boolean generatorDebugging = false;
+	private final boolean useClusterGenerator = true;
 
 	public Minesweeper(int numMines, int row, int col)
 	{
@@ -67,11 +67,11 @@ public class Minesweeper extends JPanel implements MouseListener
 
 		//Draw game control buttons (EXTRA CREDIT)
 
-		if (mouseClicked && this.lost == false)
+		if (mouseClicked)
 		{
 			int c = mouseY/20;
 			int r = mouseX/20;
-			if(r >= 0 && r < rows && c >= 0 && c < cols) {
+			if(r >= 0 && r < rows && c >= 0 && c < cols && this.lost == false) {
 				System.out.println("Playing tile ("+r+", "+c+") ...");
 				if(mineMap.getSpot(r,c).getMine()) {
 					((MineCell)mineMap.getSpot(r,c)).setLose(true);
@@ -80,14 +80,13 @@ public class Minesweeper extends JPanel implements MouseListener
 
 						this.lost = true;
 
-						System.out.println("Revealing all cells");
+						System.out.println("You lost! Revealing all MineCells");
 						int temp = 0;
 						for(int rr = 0; rr < this.rows; rr++)
 						for(int cc = 0; cc < this.cols; cc++) {
-							if(mineMap.getSpot(r,c).getMine()) {
-								//System.out.println("    MineCell found");
+							if(mineMap.getSpot(rr,cc).getMine()) {
 								temp++;
-								((MineCell)mineMap.getSpot(r,c)).setLose(true);
+								((MineCell)mineMap.getSpot(rr,cc)).setLose(true);
 							}
 						}
 						System.out.println("    Attempted to reveal "+temp+" MineCells");
@@ -106,8 +105,10 @@ public class Minesweeper extends JPanel implements MouseListener
 					System.out.println("    Reset button clicked");
 					JOptionPane.showMessageDialog(null, "Minefield will now reset", "Notice", JOptionPane.WARNING_MESSAGE);
 
-					//Make the grid null again
+					//Remove the loss
+					this.lost = false;
 
+					//Make the grid null again
 					for(int rr = 0; rr < this.rows; rr++)
 					for(int cc = 0; cc < this.cols; cc++) {
 						mineMap.setSpot(rr,cc, null);
