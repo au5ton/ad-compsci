@@ -29,6 +29,9 @@ public class MineCell extends Cell
 		this.lose = lose;
 	}
 
+	public boolean getLose() {
+		return this.lose;
+	}
 
 	public void draw(Graphics window)
 	{

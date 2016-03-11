@@ -61,6 +61,13 @@ public class Grid
 		return full;
 	}
 
+	public boolean withinBounds(int r, int c) {
+		if(r >= 0 && r < grid.length && c >= 0 && c < grid[r].length) {
+			return true;
+		}
+		return false;
+	}
+
 	public String toString()
 	{
 		String output="";

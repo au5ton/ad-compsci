@@ -19,8 +19,11 @@ public class Minesweeper extends JPanel implements MouseListener
 	private int numOriginalMines;
 	private int clusterProgress;
 	private int countPerCluster;
+	private int temp;
 	private final boolean cellLockEnabled = true;
 	private boolean lost;
+	private final boolean generatorDebugging = true;
+	private final boolean useClusterGenerator = false;
 
 	public Minesweeper(int numMines, int row, int col)
 	{
@@ -32,7 +35,12 @@ public class Minesweeper extends JPanel implements MouseListener
 		mineMap = new Grid(rows,cols);
 
 		//randomly load numMines amount of mines into the grid (make sure you address a mine that would be placed on top of another mine)
-		loadGrid(numMines);
+		if(this.useClusterGenerator) {
+			loadGridClustered(this.numOriginalMines);
+		}
+		else {
+			loadGrid(this.numOriginalMines);
+		}
 
 		setBackground(Color.white);
 		setVisible(true);
@@ -105,7 +113,12 @@ public class Minesweeper extends JPanel implements MouseListener
 						mineMap.setSpot(rr,cc, null);
 					}
 
-					loadGrid(this.numOriginalMines);
+					if(this.useClusterGenerator) {
+						loadGridClustered(this.numOriginalMines);
+					}
+					else {
+						loadGrid(this.numOriginalMines);
+					}
 					numberOfMines();
 					repaint();
 				}
@@ -204,6 +217,9 @@ public class Minesweeper extends JPanel implements MouseListener
 			}
 			//Current spot in temp_r,temp_c is confirmed to be null because of the previous loop
 			mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*20, temp_c*20, 20, 20, true));
+			if(this.generatorDebugging) {
+				((MineCell)mineMap.getSpot(temp_r,temp_c)).setLose(true);
+			}
 			//System.out.println("MineCell generated for: ("+temp_r+", "+temp_c+")");
 			temp++;
 		}
@@ -221,6 +237,7 @@ public class Minesweeper extends JPanel implements MouseListener
 	//New and improved cluster generation
 	public void loadGridClustered(int numMines) {
 		this.clusterProgress = 0;
+		this.temp = 0;
 		System.out.println(this.clusterProgress+" mines requested to be generated. ");
 
 		//Clusters method won't work
@@ -229,8 +246,8 @@ public class Minesweeper extends JPanel implements MouseListener
 		}
 		else {
 
-			int clusterCount = numMines / (numMines / smallestFactor(numMines));
-			countPerCluster = numMines / smallestFactor(numMines);
+			int clusterCount = numMines / (numMines / ((int)smallestFactor(numMines)));
+			countPerCluster = numMines / ((int)smallestFactor(numMines));
 
 			this.countPerCluster = countPerCluster;
 
@@ -246,17 +263,73 @@ public class Minesweeper extends JPanel implements MouseListener
 				}
 				//Current spot in temp_r,temp_c is confirmed to be null because of the previous loop
 				mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*20, temp_c*20, 20, 20, true));
-				seeds[i] = mineMap.getSpot(temp_r, temp_c);
+				if(this.generatorDebugging) {
+					((MineCell)mineMap.getSpot(temp_r,temp_c)).setLose(true);
+				}
+				seeds[i] = (MineCell)mineMap.getSpot(temp_r, temp_c);
 			}
 
-			//TODO: loops through seeds and cluster
+			//TODO: loops through seeds and cluster ✅
+
+			for(MineCell item : seeds) {
+				clusterAroundMine(item.getX()/20,item.getY()/20);
+				this.clusterProgress = 0;
+			}
+
+			int count = 0;
+			for(int r = 0; r < this.rows; r++)
+			for(int c = 0; c < this.cols; c++) {
+				if(mineMap.getSpot(r,c) != null) {
+					count++;
+				}
+			}
+
+			System.out.println("Counted "+count+" total MineCells generated.\nExpected "+numMines);
+
+			if(numMines-count > 0)
+				System.out.println("Filled "+(numMines-count)+" missing expected mines with random ones.");
+
+			//If we're missing some extra spaces from the cluster method, use the original method
+			for(int i = 0; i < numMines-count; i++) {
+				//System.out.println("Generating MineCell...");
+				int temp_r = ((int)Math.floor(Math.random()*(this.rows)));
+				int temp_c = ((int)Math.floor(Math.random()*(this.cols)));
+				while(mineMap.getSpot(temp_r,temp_c) != null) {
+					temp_r = ((int)Math.floor(Math.random()*(this.rows)));
+					temp_c = ((int)Math.floor(Math.random()*(this.cols)));
+				}
+				//Current spot in temp_r,temp_c is confirmed to be null because of the previous loop
+				mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*20, temp_c*20, 20, 20, true));
+			}
+
+			count = 0;
+			for(int r = 0; r < this.rows; r++)
+			for(int c = 0; c < this.cols; c++) {
+				if(mineMap.getSpot(r,c) != null) {
+					count++;
+				}
+			}
+
+			System.out.println("Second count: counted "+count+" total MineCells generated.\nExpected "+numMines);
+
+			//then load the rest of the empty cells
+			for(int r = 0; r < this.rows; r++)
+			for(int c = 0; c < this.cols; c++) {
+				if(mineMap.getSpot(r,c) == null) {
+					mineMap.setSpot(r,c, new EmptyCell(r*20, c*20, 20, 20, false));
+				}
+			}
 
 		}
 	}
 
 	public void clusterAroundMine(int r, int c) {
-		if(r >= 0 && r < rows && c >= 0 && c < cols && mineMap.getSpot(r,c).getMine() && ((MineCell)mineMap.getSpot(r,c)).getLose() == false && this.clusterProgress < this.numOriginalMines) {
-			((MineCell)mineMap.getSpot(r,c)).setLose(true);
+		System.out.println("clusterAroundMine("+r+", "+c+")");
+		if(mineMap.withinBounds(r,c) && this.clusterProgress < this.countPerCluster) {
+			mineMap.setSpot(r,c, new MineCell(r*20, c*20, 20, 20, true));
+			if(this.generatorDebugging) {
+				((MineCell)mineMap.getSpot(r,c)).setLose(true);
+			}
 			this.clusterProgress++;
 
 			//1-3 inclusive, how far the cluster should be from the parent piece
@@ -266,6 +339,100 @@ public class Minesweeper extends JPanel implements MouseListener
 			int randomSprouts = (int)Math.floor(Math.random()*2)+1;
 
 			//TODO: loop through randomSprouts and recurse in randomOffset offset
+
+			for(int i = 0; i < randomSprouts; i++) {
+				double rand1 = Math.random();
+				double rand2 = Math.random();
+
+				//1-3 inclusive, how far the cluster should be from the parent piece
+				randomOffset = (int)Math.floor(Math.random()*3)+1;
+
+				if(rand1 > 0.666) {
+					//Positive r offset
+					if(rand2 > 0.666) {
+						//Positive c offset
+						if(!mineMap.withinBounds(r+randomOffset,c+randomOffset) || mineMap.getSpot(r+randomOffset,c+randomOffset) != null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r+randomOffset,c+randomOffset);
+						}
+					}
+					else if(rand2 < 0.333) {
+						//Negative c offset
+						if(!mineMap.withinBounds(r+randomOffset,c-randomOffset) || mineMap.getSpot(r+randomOffset,c-randomOffset) != null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r+randomOffset,c-randomOffset);
+						}
+					}
+					else {
+						//C offset uneffected
+						if(!mineMap.withinBounds(r+randomOffset,c) || mineMap.getSpot(r+randomOffset,c) != null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r+randomOffset,c);
+						}
+					}
+				}
+				else if(rand1 < 0.333) {
+					//Negative r offset
+					if(rand2 > 0.666) {
+						//Positive c offset
+						if(!mineMap.withinBounds(r-randomOffset,c+randomOffset) || mineMap.getSpot(r-randomOffset,c+randomOffset)!= null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r-randomOffset,c+randomOffset);
+						}
+					}
+					else if(rand2 < 0.333) {
+						//Negative c offset
+						if(!mineMap.withinBounds(r-randomOffset,c-randomOffset) || mineMap.getSpot(r-randomOffset,c-randomOffset) != null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r-randomOffset,c-randomOffset);
+						}
+					}
+					else {
+						//C offset uneffected
+						if(!mineMap.withinBounds(r-randomOffset,c) || mineMap.getSpot(r-randomOffset,c) != null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r-randomOffset,c);
+						}
+					}
+				}
+				else {
+					//R offset uneffected
+					if(rand2 > 0.666) {
+						//Positive c offset
+						if(!mineMap.withinBounds(r,c+randomOffset) || mineMap.getSpot(r,c+randomOffset) != null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r,c+randomOffset);
+						}
+					}
+					else if(rand2 < 0.333) {
+						//Negative c offset
+						if(!mineMap.withinBounds(r,c-randomOffset) || mineMap.getSpot(r,c-randomOffset) != null) {
+							randomSprouts++; //loop another time
+						}
+						else {
+							clusterAroundMine(r,c-randomOffset);
+						}
+					}
+					else {
+						//C offset uneffected; REDUNDANT IT'S THE SAME TILE
+					}
+				}
+
+			}
 
 
 		}
