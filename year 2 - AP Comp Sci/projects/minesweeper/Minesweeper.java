@@ -34,11 +34,11 @@ public class Minesweeper extends JPanel implements MouseListener
 
 		//then load the rest of the empty cells
 		for(int r = 0; r < this.rows; r++)
-		for(int c = 0; c < this.cols; c++) {
-			if(mineMap.getSpot(r,c) == null) {
-				mineMap.setSpot(r,c, new EmptyCell(r*this.rows+10, c*this.cols+10, 10, 10, false));
+			for(int c = 0; c < this.cols; c++) {
+				if(mineMap.getSpot(r,c) == null) {
+					mineMap.setSpot(r,c, new EmptyCell(r*this.rows+10, c*this.cols+10, 10, 10, false));
+				}
 			}
-		}
 
 		setBackground(Color.white);
 		setVisible(true);
@@ -74,9 +74,9 @@ public class Minesweeper extends JPanel implements MouseListener
 
 	public void drawMineGrid( Graphics window  )
 	{
-
 		//draw the grid
-
+		mineMap.drawGrid(window); //almost rewrote this whole method lol
+		
 	}
 
 	public void play( int r, int c )
@@ -84,12 +84,43 @@ public class Minesweeper extends JPanel implements MouseListener
 
 		//recursively reveal empty cells
 		//if a mine is clicked, all mines should be revealed
+		if(r >= 0 && r < rows && c >= 0 && c < cols) { //within bounds
+			if(!mineMap.getSpot(r,c).getMine() && !((EmptyCell)mineMap.getSpot(r,c)).getVisited()) { //NOT a mine and NOT visited
+				((EmptyCell)mineMap.getSpot(r,c)).setVisited(true);
+				/*play(r-1,c-1);
+				play(r-1,c+1);
+				play(r+1,c-1);
+				play(r+1,c+1);
+				play(r,c-1);
+				play(r,c+1);
+				play(r-1,c);
+				play(r+1,c);*/
+				
+				for(int rr = -1; rr <= 1; rr++) {
+					for(int cc = -1; cc <= 1; cc++) {
+						play(r+rr,c+cc);
+					}
+				}
+			}
+		}
 
 	}
 
 	public void numberOfMines()
 	{
 		//count and set the number of surrounding mines for each cell
+		for(int r = 0; r < this.rows; r++)
+			for(int c = 0; c < this.cols; c++) {
+				int count = 0;
+				for(int rr = -1; rr <= 1; rr++) {
+					for(int cc = -1; cc <= 1; cc++) {
+						if(mineMap.getSpot(r+rr,c+cc).getMine()) {
+							count++;
+						}
+					}
+				}
+				((EmptyCell)mineMap.getSpot(r,c)).setCount(count);
+			}
 	}
 
 

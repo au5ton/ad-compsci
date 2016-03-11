@@ -53,9 +53,9 @@ public class Grid
 			for(int c=0;c<grid[r].length;c++)
 			{
 				if(grid[r][c]!=null)
-				grid[r][c].draw(window);
+					grid[r][c].draw(window);
 				else
-				full=false;
+					full=false;
 			}
 		}
 		return full;
