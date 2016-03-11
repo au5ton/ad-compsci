@@ -143,6 +143,9 @@ public class Minesweeper extends JPanel implements MouseListener
 
 		if(this.lost) {
 
+			window.setColor(Color.WHITE);
+			window.fillRect(45,45,140,25);
+
 			window.setColor(Color.BLACK);
 			window.drawString("Sorry, but you lost. :(", 50+1, 65+1);
 
