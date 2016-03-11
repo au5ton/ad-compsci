@@ -98,7 +98,7 @@ public class EmptyCell extends Cell
 					//
 				}
 			}
-			window.drawString(Integer.toString(this.count), getX(), getY());
+			window.drawString(Integer.toString(this.count), getX()+6, getY()+14);
 		}
 	}
 

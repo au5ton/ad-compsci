@@ -20,19 +20,24 @@ public class Minesweeper extends JPanel implements MouseListener
 		cols = col;
 		mineMap = new Grid(rows,cols);
 
+		int temp = 0;
+		System.out.println(numMines+" mines requested to be generated.");
+
 		//randomly load numMines amount of mines into the grid (make sure you address a mine that would be placed on top of another mine)
 		for(int i = 0; i < numMines; i++) {
-			System.out.println("Generating MineCell...");
-			int temp_r = ((int)Math.random()*(this.rows+1));
-			int temp_c = ((int)Math.random()*(this.cols+1));
+			//System.out.println("Generating MineCell...");
+			int temp_r = ((int)Math.floor(Math.random()*(this.rows)));
+			int temp_c = ((int)Math.floor(Math.random()*(this.cols)));
 			while(mineMap.getSpot(temp_r,temp_c) != null) {
-				temp_r = ((int)Math.random()*(this.rows+1));
-				temp_c = ((int)Math.random()*(this.cols+1));
+				temp_r = ((int)Math.floor(Math.random()*(this.rows)));
+				temp_c = ((int)Math.floor(Math.random()*(this.cols)));
 			}
 			//Current spot in temp_r,temp_c is confirmed to be null because of the previous loop
 			mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*this.rows, temp_c*this.cols, 20, 20, true));
-			System.out.println("MineCell generated for: ("+temp_r+", "+temp_c+")");
+			//System.out.println("MineCell generated for: ("+temp_r+", "+temp_c+")");
+			temp++;
 		}
+		System.out.println(temp+" mines generated.");
 
 		//then load the rest of the empty cells
 		for(int r = 0; r < this.rows; r++)
@@ -45,7 +50,7 @@ public class Minesweeper extends JPanel implements MouseListener
 		setBackground(Color.white);
 		setVisible(true);
 		numberOfMines();
-
+		repaint();
 		addMouseListener(this);
 	}
 
@@ -68,7 +73,14 @@ public class Minesweeper extends JPanel implements MouseListener
 		{
 			int c = mouseY/cols;
 			int r = mouseX/rows;
-			play(r,c);
+			System.out.println("Playing tile ("+r+", "+c+") ...");
+			if(mineMap.getSpot(r,c).getMine()) {
+				((MineCell)mineMap.getSpot(r,c)).setLose(true);
+			}
+			else {
+				play(r,c);
+			}
+			System.out.println("    Recursion stack complete.");
 			mouseClicked = false;
 		}
 		drawMineGrid(window);
@@ -78,17 +90,17 @@ public class Minesweeper extends JPanel implements MouseListener
 	{
 		//draw the grid
 		mineMap.drawGrid(window); //almost rewrote this whole method lol
-
 	}
 
 	public void play( int r, int c )
 	{
-
+		//System.out.println("    play("+r+","+c+");");
 		//recursively reveal empty cells
 		//if a mine is clicked, all mines should be revealed
 		if(r >= 0 && r < rows && c >= 0 && c < cols) { //within bounds
 			if(!mineMap.getSpot(r,c).getMine() && !((EmptyCell)mineMap.getSpot(r,c)).getVisited()) { //NOT a mine and NOT visited
 				((EmptyCell)mineMap.getSpot(r,c)).setVisited(true);
+				System.out.println("    play("+r+","+c+");");
 				/*play(r-1,c-1);
 				play(r-1,c+1);
 				play(r+1,c-1);
@@ -100,10 +112,18 @@ public class Minesweeper extends JPanel implements MouseListener
 
 				for(int rr = -1; rr <= 1; rr++) {
 					for(int cc = -1; cc <= 1; cc++) {
-						play(r+rr,c+cc);
+						if(((EmptyCell)mineMap.getSpot(r,c)).getCount() == 0) {
+							play(r+rr,c+cc);
+						}
 					}
 				}
 			}
+			/*else if(mineMap.getSpot(r,c).getMine()) {
+				for(int r = 0; r < rows; r++)
+					for(int c = 0; c < cols; c++) {
+						mineMap.getSpot(r,c).draw()
+					}
+			}*/
 		}
 
 	}
