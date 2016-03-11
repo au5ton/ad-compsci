@@ -22,6 +22,7 @@ public class Minesweeper extends JPanel implements MouseListener
 
 		//randomly load numMines amount of mines into the grid (make sure you address a mine that would be placed on top of another mine)
 		for(int i = 0; i < numMines; i++) {
+			System.out.println("Generating MineCell...");
 			int temp_r = ((int)Math.random()*(this.rows+1));
 			int temp_c = ((int)Math.random()*(this.cols+1));
 			while(mineMap.getSpot(temp_r,temp_c) != null) {
@@ -29,16 +30,17 @@ public class Minesweeper extends JPanel implements MouseListener
 				temp_c = ((int)Math.random()*(this.cols+1));
 			}
 			//Current spot in temp_r,temp_c is confirmed to be null because of the previous loop
-			mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*this.rows+10, temp_c*this.cols+10, 10, 10, true));
+			mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*this.rows, temp_c*this.cols, 20, 20, true));
+			System.out.println("MineCell generated for: ("+temp_r+", "+temp_c+")");
 		}
 
 		//then load the rest of the empty cells
 		for(int r = 0; r < this.rows; r++)
-			for(int c = 0; c < this.cols; c++) {
-				if(mineMap.getSpot(r,c) == null) {
-					mineMap.setSpot(r,c, new EmptyCell(r*this.rows+10, c*this.cols+10, 10, 10, false));
-				}
+		for(int c = 0; c < this.cols; c++) {
+			if(mineMap.getSpot(r,c) == null) {
+				mineMap.setSpot(r,c, new EmptyCell(r*this.rows, c*this.cols, 20, 20, false));
 			}
+		}
 
 		setBackground(Color.white);
 		setVisible(true);
@@ -76,7 +78,7 @@ public class Minesweeper extends JPanel implements MouseListener
 	{
 		//draw the grid
 		mineMap.drawGrid(window); //almost rewrote this whole method lol
-		
+
 	}
 
 	public void play( int r, int c )
@@ -95,7 +97,7 @@ public class Minesweeper extends JPanel implements MouseListener
 				play(r,c+1);
 				play(r-1,c);
 				play(r+1,c);*/
-				
+
 				for(int rr = -1; rr <= 1; rr++) {
 					for(int cc = -1; cc <= 1; cc++) {
 						play(r+rr,c+cc);
@@ -110,17 +112,19 @@ public class Minesweeper extends JPanel implements MouseListener
 	{
 		//count and set the number of surrounding mines for each cell
 		for(int r = 0; r < this.rows; r++)
-			for(int c = 0; c < this.cols; c++) {
+		for(int c = 0; c < this.cols; c++) {
+			if(!mineMap.getSpot(r,c).getMine()) {
 				int count = 0;
 				for(int rr = -1; rr <= 1; rr++) {
 					for(int cc = -1; cc <= 1; cc++) {
-						if(mineMap.getSpot(r+rr,c+cc).getMine()) {
+						if(r+rr >= 0 && r+rr < rows && c+cc >= 0 && c+cc < cols && mineMap.getSpot(r+rr,c+cc).getMine()) {
 							count++;
 						}
 					}
 				}
 				((EmptyCell)mineMap.getSpot(r,c)).setCount(count);
 			}
+		}
 	}
 
 
