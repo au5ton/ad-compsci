@@ -17,6 +17,8 @@ public class Minesweeper extends JPanel implements MouseListener
 	private int rows;
 	private int cols;
 	private int numOriginalMines;
+	private int clusterProgress;
+	private int countPerCluster;
 	private final boolean cellLockEnabled = true;
 	private boolean lost;
 
@@ -162,12 +164,7 @@ public class Minesweeper extends JPanel implements MouseListener
 					}
 				}
 			}
-			/*else if(mineMap.getSpot(r,c).getMine()) {
-				for(int r = 0; r < rows; r++)
-					for(int c = 0; c < cols; c++) {
-						mineMap.getSpot(r,c).draw()
-					}
-			}*/
+
 		}
 
 	}
@@ -191,6 +188,7 @@ public class Minesweeper extends JPanel implements MouseListener
 		}
 	}
 
+	//Old grid generation method
 	public void loadGrid(int numMines) {
 		int temp = 0;
 		System.out.println(numMines+" mines requested to be generated. ");
@@ -220,7 +218,81 @@ public class Minesweeper extends JPanel implements MouseListener
 		}
 	}
 
+	//New and improved cluster generation
+	public void loadGridClustered(int numMines) {
+		this.clusterProgress = 0;
+		System.out.println(this.clusterProgress+" mines requested to be generated. ");
 
+		//Clusters method won't work
+		if(isPrime(numMines)) {
+			loadGrid(numMines);
+		}
+		else {
+
+			int clusterCount = numMines / (numMines / smallestFactor(numMines));
+			countPerCluster = numMines / smallestFactor(numMines);
+
+			this.countPerCluster = countPerCluster;
+
+			MineCell[] seeds = new MineCell[clusterCount];
+
+			//Generates initial clusterCount of random tiles
+			for(int i = 0; i < clusterCount; i++) {
+				int temp_r = ((int)Math.floor(Math.random()*(this.rows)));
+				int temp_c = ((int)Math.floor(Math.random()*(this.cols)));
+				while(mineMap.getSpot(temp_r,temp_c) != null) {
+					temp_r = ((int)Math.floor(Math.random()*(this.rows)));
+					temp_c = ((int)Math.floor(Math.random()*(this.cols)));
+				}
+				//Current spot in temp_r,temp_c is confirmed to be null because of the previous loop
+				mineMap.setSpot(temp_r,temp_c, new MineCell(temp_r*20, temp_c*20, 20, 20, true));
+				seeds[i] = mineMap.getSpot(temp_r, temp_c);
+			}
+
+			//TODO: loops through seeds and cluster
+
+		}
+	}
+
+	public void clusterAroundMine(int r, int c) {
+		if(r >= 0 && r < rows && c >= 0 && c < cols && mineMap.getSpot(r,c).getMine() && ((MineCell)mineMap.getSpot(r,c)).getLose() == false && this.clusterProgress < this.numOriginalMines) {
+			((MineCell)mineMap.getSpot(r,c)).setLose(true);
+			this.clusterProgress++;
+
+			//1-3 inclusive, how far the cluster should be from the parent piece
+			int randomOffset = (int)Math.floor(Math.random()*3)+1;
+
+			//1-3 inclusive, how many times this piece should branch off
+			int randomSprouts = (int)Math.floor(Math.random()*2)+1;
+
+			//TODO: loop through randomSprouts and recurse in randomOffset offset
+
+
+		}
+	}
+
+
+	private static boolean isPrime(int num) {
+		if (num < 2) return false;
+		if (num == 2) return true;
+		if (num % 2 == 0) return false;
+		for (int i = 3; i * i <= num; i += 2)
+		if (num % i == 0) return false;
+		return true;
+	}
+
+	public static long smallestFactor(int C)
+	{
+		for (int i = 2; i*i<= C; i++)
+		{
+			if (C % i == 0)
+			{
+				return i;
+			}
+		}
+
+		return C;
+	}
 
 	public void mouseEntered(MouseEvent e) { }
 	public void mouseExited(MouseEvent e) { }
