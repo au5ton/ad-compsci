@@ -59,6 +59,9 @@ public class EmptyCell extends Cell
 		if(this.visited) {
 			window.setColor(Color.LIGHT_GRAY);
 			window.fillRect(getX(),getY(),getWidth(),getHeight());
+         
+         window.setColor(Color.DARK_GRAY);
+		   window.drawRect(getX(),getY(),getWidth(),getHeight());
 
 			//window.setFont(Font.MONOSPACED);
 			switch(this.count) {
@@ -98,7 +101,8 @@ public class EmptyCell extends Cell
 					//
 				}
 			}
-			window.drawString(Integer.toString(this.count), getX()+6, getY()+14);
+			if(this.count > 0)
+            window.drawString(Integer.toString(this.count), getX()+6, getY()+14);
 		}
 	}
 
