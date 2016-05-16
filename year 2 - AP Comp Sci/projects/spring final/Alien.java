@@ -34,7 +34,8 @@ public class Alien extends MovingThing
 		//add code here
       try
 		{
-			URL url = getClass().getResource("cat.png");
+         int n = (int)(Math.random()*3);
+			URL url = getClass().getResource("cat"+n+".png");
 			image = ImageIO.read(url);
 		}
 		catch(Exception e)
@@ -60,7 +61,7 @@ public class Alien extends MovingThing
 
 	   //add code here
       //check bounds of the alien
-      if(getX() >= StarFighter.WIDTH || getX() <= 0) {
+      if(getX() >= StarFighter.WIDTH-getWidth() || getX() <= 0) {
          setSpeed(getSpeed()*-1);
          setY(getY()+25);
       }
