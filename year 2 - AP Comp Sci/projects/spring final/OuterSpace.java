@@ -9,6 +9,7 @@ import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
@@ -20,6 +21,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    private Ship ship;
    private Alien alienOne;
    private Alien alienTwo;
+   private boolean gameOver = false;
 	
 
 	private boolean[] keys;
@@ -27,16 +29,21 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 	public OuterSpace()
 	{
+		this(5,20,1);
+	}
+   
+   public OuterSpace(int shipSpeed, int hordeCount, int alienSpeed)
+	{
 		setBackground(Color.black);
 
 		keys = new boolean[5];
 
 		//instantiate what you need as you need it (from global objects above)
-      ship = new Ship(310,450,5);
+      ship = new Ship(310,450,shipSpeed);
       
       //alienOne = new Alien(100,50);
       //alienTwo = new Alien(150,50);
-      horde = new AlienHorde(20);
+      horde = new AlienHorde(hordeCount, alienSpeed);
       shots = new Bullets();
       
 		this.addKeyListener(this);
@@ -114,6 +121,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
       shots.drawEmAll(graphToBack);
       twoDGraph.drawImage(back, null, 0, 0);
       back = null;
+      
+      gameOver = horde.aliensVanquished();
 	}
 
 
@@ -178,11 +187,12 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    {
    	try
    	{
-   		while(true)
+   		while(!gameOver)
    		{
    		   Thread.currentThread().sleep(5);
             repaint();
          }
+         JOptionPane.showMessageDialog(null, "You saved PUGSLY! The galaxy is safe ... for now.", "Notice", JOptionPane.INFORMATION_MESSAGE);
       }catch(Exception e)
       {
          //feel free to add something here, or not

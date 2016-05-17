@@ -10,14 +10,19 @@ public class AlienHorde
 {
 	private List<Alien> aliens;
 
-	public AlienHorde(int size)
+   public AlienHorde(int size)
+	{
+      this(size,1);
+	}
+
+	public AlienHorde(int size, int speed)
 	{
       //initalize ArrayList
       aliens = new ArrayList<Alien>();
       //and fill with size amount of aliens (75 pixels apart)
       int c = 25, r = 50;
       for(int i = 0; i < size; i++) {
-         aliens.add(new Alien(r,c,1));
+         aliens.add(new Alien(r,c,speed));
          r += 75;
          if(r + aliens.get(i).getWidth() >= StarFighter.WIDTH) {
             r = 50;
@@ -71,6 +76,11 @@ public class AlienHorde
       }
       
    }
+   
+   public boolean aliensVanquished() {
+      return (aliens.size() == 0);
+   }
+   
 	public String toString()
 	{
 		return "" + aliens;
