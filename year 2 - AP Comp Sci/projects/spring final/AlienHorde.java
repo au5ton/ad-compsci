@@ -51,7 +51,6 @@ public class AlienHorde
          item.move("DOWN");
       }
 	}
-/*
    public void removeDeadOnes(List<Ammo> shots)
 	{
       //Part 3
@@ -60,8 +59,18 @@ public class AlienHorde
       //(do the coordinates of the shot fall between the boundarises of the alien)
       //if they do then remove the alien and the shot
       //make sure you break out of the loop if this happens
-	}
-*/
+	   
+      for(int i = 0; i < shots.size(); i++) {
+         for(int j = 0; j < aliens.size(); j++) {
+            if(shots.get(i).getX() >= aliens.get(j).getX() && shots.get(i).getX() <= aliens.get(j).getX()+aliens.get(j).getWidth())
+               if(shots.get(i).getY() >= aliens.get(j).getY() && shots.get(i).getY() <= aliens.get(j).getY()+aliens.get(j).getHeight()) {
+                  shots.remove(i);
+                  aliens.remove(j);
+               }
+         }
+      }
+      
+   }
 	public String toString()
 	{
 		return "" + aliens;

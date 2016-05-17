@@ -24,6 +24,7 @@ public class Bullets
 
 	public void drawEmAll( Graphics window )
 	{
+      cleanEmUp();
       //draw each ammo in the list
       for(Ammo item : ammo) {
          item.draw(window);

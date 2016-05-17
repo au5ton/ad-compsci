@@ -92,7 +92,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
       
       if(keys[4] == true)
       {
-         shots.add(new Ammo()); //TODO
+         shots.add(new Ammo(ship.getX(),ship.getY(),1)); //TODO
+         keys[4] = false;
       }
       
       
@@ -109,6 +110,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
       //alienTwo.draw(graphToBack);
       horde.moveEmAll();
       horde.drawEmAll(graphToBack);
+      horde.removeDeadOnes(shots.getList());
+      shots.drawEmAll(graphToBack);
       twoDGraph.drawImage(back, null, 0, 0);
       back = null;
 	}
