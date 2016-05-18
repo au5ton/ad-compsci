@@ -1,14 +1,15 @@
-import java.io.File;
-import java.net.URL;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.io.*;
+import java.net.*;
+import java.awt.*;
+import java.util.*;
 import javax.imageio.ImageIO;
 
 public class Ship extends MovingThing
 {
    private int speed;
    private Image image;
+   private int lives = 3;
+   private boolean canBeTouched;
 
    public Ship()
    {
@@ -54,6 +55,11 @@ public class Ship extends MovingThing
       //continue coding
       return this.speed;
    }
+   
+   public int getLives()
+   {
+      return this.lives;
+   }
 
    public void move(String direction)
    {
@@ -75,9 +81,36 @@ public class Ship extends MovingThing
    }
 
    public void draw( Graphics window )
-   {
+   {  
       window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
    }
+   
+   public void aliensAttackShips(ArrayList<Alien> aliens)
+	{
+      //Part 3
+      //for every shot in the list
+      //check if you've hit any alien in the list
+      //(do the coordinates of the shot fall between the boundarises of the alien)
+      //if they do then remove the alien and the shot
+      //make sure you break out of the loop if this happens
+	   
+      for(int i = 0; i < aliens.size(); i++) {
+         if(getX() >= aliens.get(i).getX() && getX() <= aliens.get(i).getX()+aliens.get(i).getWidth()) {
+            if(getY() >= aliens.get(i).getY() && getY() <= aliens.get(i).getY()+aliens.get(i).getHeight() && canBeTouched == true) {
+               this.lives--;
+               canBeTouched = false;
+            }
+            else {
+               canBeTouched = true;
+            }
+         }
+         else {
+            canBeTouched = true;
+         }
+      }
+      
+   }
+
 
    public String toString()
    {

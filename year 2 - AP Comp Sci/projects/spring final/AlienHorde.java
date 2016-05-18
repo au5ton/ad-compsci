@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AlienHorde
 {
-	private List<Alien> aliens;
+	private ArrayList<Alien> aliens;
 
    public AlienHorde(int size)
 	{
@@ -80,6 +80,23 @@ public class AlienHorde
    public boolean aliensVanquished() {
       return (aliens.size() == 0);
    }
+   
+   public ArrayList<Alien> getList()
+	{
+		//add code
+      return aliens;
+   }
+   
+   public boolean checkForLoss()
+	{
+      //make sure you move all aliens in the list 
+      for(Alien item : aliens) {
+         if(item.getY()+item.getHeight() > StarFighter.HEIGHT) {
+            return true;
+         }
+      }
+      return false;
+	}
    
 	public String toString()
 	{

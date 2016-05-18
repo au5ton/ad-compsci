@@ -22,6 +22,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    private Alien alienOne;
    private Alien alienTwo;
    private boolean gameOver = false;
+   private int wave = 0;
+   
+   private int shipSpeed;
+   private int hordeCount;
+   private int alienSpeed;
 	
 
 	private boolean[] keys;
@@ -34,6 +39,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    
    public OuterSpace(int shipSpeed, int hordeCount, int alienSpeed)
 	{
+   
+      this.shipSpeed = shipSpeed;
+      this.hordeCount = hordeCount;
+      this.alienSpeed = alienSpeed;   
+      
 		setBackground(Color.black);
 
 		keys = new boolean[5];
@@ -119,10 +129,35 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
       horde.drawEmAll(graphToBack);
       horde.removeDeadOnes(shots.getList());
       shots.drawEmAll(graphToBack);
+      
+      ship.aliensAttackShips(horde.getList());
+      
+      graphToBack.setColor(Color.PINK);
+      graphToBack.drawString("Lives left: "+ship.getLives(),20,20);
+      System.out.println("Lives left: "+ship.getLives());
+      
       twoDGraph.drawImage(back, null, 0, 0);
       back = null;
       
-      gameOver = horde.aliensVanquished();
+      if(horde.aliensVanquished()) {
+      
+         if(shipSpeed > 1) {
+            shipSpeed--;
+         }
+         hordeCount += 2;
+         alienSpeed++;
+      
+         ship = new Ship(310,450,shipSpeed);
+         horde = new AlienHorde(hordeCount, alienSpeed);
+         
+         wave++;
+         
+         if(wave > 6) {
+            gameOver = true;
+         }
+      }
+      
+      //gameOver = horde.aliensVanquished();
 	}
 
 
@@ -187,12 +222,22 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    {
    	try
    	{
+         int game = 0;
    		while(!gameOver)
    		{
-   		   Thread.currentThread().sleep(5);
+   		   Thread.currentThread().sleep(5); // should be 5
             repaint();
+            if(horde.checkForLoss()) {
+               game = -1;
+               break;
+            }
          }
-         JOptionPane.showMessageDialog(null, "You saved PUGSLY! The galaxy is safe ... for now.", "Notice", JOptionPane.INFORMATION_MESSAGE);
+         if(game == -1) {
+            JOptionPane.showMessageDialog(null, "get gud kid (you lost)", "fuckin #rekt son 420 blazzze", JOptionPane.INFORMATION_MESSAGE);
+         }
+         else {
+            JOptionPane.showMessageDialog(null, "You saved PUGSLY! The galaxy is safe ... for now.", "Notice", JOptionPane.INFORMATION_MESSAGE);
+         }
       }catch(Exception e)
       {
          //feel free to add something here, or not
