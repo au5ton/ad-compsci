@@ -10,6 +10,11 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
+import java.io.*;
+import java.net.*;
+import java.awt.*;
+import java.util.*;
+import javax.imageio.ImageIO;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
@@ -31,6 +36,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 	private boolean[] keys;
 	private BufferedImage back;
+   private Image background;
 
 	public OuterSpace()
 	{
@@ -55,6 +61,18 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
       //alienTwo = new Alien(150,50);
       horde = new AlienHorde(hordeCount, alienSpeed);
       shots = new Bullets();
+      
+      try
+      {
+         URL url = getClass().getResource("space.png");
+         background = ImageIO.read(url);
+      }
+      catch(Exception e)
+      {
+      	//feel free to do something here
+         throw new IllegalArgumentException("Cannot find space.png");
+      }
+
       
 		this.addKeyListener(this);
 		new Thread(this).start();
@@ -121,7 +139,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 
       
-		
+		graphToBack.drawImage(background,0,0,null);
       ship.draw(graphToBack);
       //alienOne.draw(graphToBack);
       //alienTwo.draw(graphToBack);
@@ -234,9 +252,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
          }
          if(game == -1) {
             JOptionPane.showMessageDialog(null, "get gud kid (you lost)", "fuckin #rekt son 420 blazzze", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
          }
          else {
             JOptionPane.showMessageDialog(null, "You saved PUGSLY! The galaxy is safe ... for now.", "Notice", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
          }
       }catch(Exception e)
       {
