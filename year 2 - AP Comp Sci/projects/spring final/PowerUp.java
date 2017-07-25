@@ -11,6 +11,11 @@ public class PowerUp extends MovingThing
 {
    private int type;
    
+   private int speed;
+   private Image image;
+   private int lives = 3;
+   private boolean canBeTouched;
+   
    public final int SPEED_BOOST = 1;
    public final int FIRE_HOSE = 2;
    public final int SLOW_ALIENS = 3;
@@ -38,6 +43,25 @@ public class PowerUp extends MovingThing
          setColor(Color.BLUE);
          window.fillOval(getX(),getY(),getWidth(),getHeight());
       }
+   }
+   
+   public void move(String direction)
+   {
+   	//add code here
+      
+      if(direction.equals("LEFT")) {
+         setX(getX()-this.speed);
+      }
+      else if(direction.equals("RIGHT")) {
+         setX(getX()+this.speed);
+      }
+      else if(direction.equals("UP")) {
+         setY(getY()-this.speed);
+      }
+      else if(direction.equals("DOWN")) {
+         setY(getY()+this.speed);
+      }
+      
    }
    
    public String toString()

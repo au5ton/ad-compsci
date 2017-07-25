@@ -23,7 +23,7 @@ public class Minesweeper extends JPanel implements MouseListener
 	private final boolean cellLockEnabled = false;
 	private boolean lost;
 	private final boolean generatorDebugging = false;
-	private final boolean useClusterGenerator = false;
+	private final boolean useClusterGenerator = true;
 
 	public Minesweeper(int numMines, int row, int col)
 	{
